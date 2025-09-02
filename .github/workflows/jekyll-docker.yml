@@ -2,8 +2,12 @@ name: Run Cypress and Deploy Report
 
 on:
   workflow_dispatch:
+
 permissions:
-  contents: write  
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
@@ -26,18 +30,19 @@ jobs:
       - name: Run Cypress tests
         run: npx cypress run --reporter mochawesome --reporter-options overwrite=false,html=true,json=true,reportDir=cypress/reports/html
 
-      - name: Upload report artifact
-        uses: actions/upload-artifact@v4
+      - name: Upload report artifact for Pages
         if: always()
+        uses: actions/upload-pages-artifact@v3
         with:
-          name: cypress-report
           path: cypress/reports/html
 
-      - name: Deploy report to GitHub Pages
-        if: always()
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: cypress/reports/html
-          publish_branch: gh-pages
-          enable_jekyll: false
+  deploy:
+    needs: cypress-run
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
