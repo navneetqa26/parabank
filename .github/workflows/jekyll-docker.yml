@@ -22,13 +22,17 @@ jobs:
           node-version: 18
 
       - name: Install dependencies
-        run: npm ci  # use ci for clean install
-
-      - name: Run Cypress tests with Mochawesome reporter
-        run: npx cypress run --headless --reporter mochawesome --reporter-options overwrite=false,html=true,json=true,reportDir=cypress/reports/html
+        run: npm ci  # clean install
 
       - name: Ensure report folder exists
         run: mkdir -p cypress/reports/html
+
+      - name: Run Cypress tests with Mochawesome reporter
+        run: |
+          npx cypress run --headless \
+            --reporter mochawesome \
+            --reporter-options overwrite=false,html=true,json=true,reportDir=cypress/reports/html
+        continue-on-error: false  # This ensures the job fails if tests fail
 
       - name: Upload report artifact for Pages
         if: always()
@@ -43,5 +47,4 @@ jobs:
       name: github-pages
     steps:
       - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+        id: deployme
