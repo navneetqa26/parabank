@@ -1,0 +1,26 @@
+{
+  "newUser": {
+    "firstName": "Navneet",
+    "lastName": "Singh",
+    "address": "123 Main St",
+    "city": "Springfield",
+    "state": "IL",
+    "zipcode": "62701",
+    "phone": "+91 9816841938",
+    "ssn": "123-45-6789",
+    "username": "test",
+    "password": "Password123"
+  },
+  "existingUser": {
+    "firstName": "Navneet",
+    "lastName": "Singh",
+    "address": "123 Main St",
+    "city": "Springfield",
+    "state": "IL",
+    "zipcode": "62701",
+    "phone": "+91 9816841938",
+    "ssn": "123-45-6789",
+    "username": "test",
+    "password": "root"
+  }
+}

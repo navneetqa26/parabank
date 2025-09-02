@@ -1,0 +1,25 @@
+{
+  "name": "parabank-cypress",
+  "version": "1.0.0",
+  "main": "cypress.config.js",
+"scripts": {
+  "cypress:run": "cypress run --headless",
+  "merge-report": "mochawesome-merge cypress/reports/mochawesome/*.json > mochawesome.json",
+  "generate-report": "marge mochawesome.json --reportDir cypress/reports/final --inline --assets-inline"
+}
+,
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "cypress": "^15.0.0"
+  },
+  "devDependencies": {
+    "cypress-mochawesome-reporter": "^3.8.4",
+    "dotenv": "^17.2.1",
+    "mochawesome": "^7.1.3",
+    "mochawesome-merge": "^4.4.1",
+    "mochawesome-report-generator": "^6.2.0"
+  }
+}
