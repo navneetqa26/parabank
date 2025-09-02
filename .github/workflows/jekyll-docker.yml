@@ -2,7 +2,8 @@ name: Run Cypress and Deploy Report
 
 on:
   workflow_dispatch:
-
+permissions:
+  contents: write  
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
