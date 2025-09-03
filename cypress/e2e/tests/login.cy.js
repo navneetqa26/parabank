@@ -27,7 +27,7 @@ describe('Signup Test Suite', () => {
     login.passwordtype(testData.validUser.password);
     login.loginclick();
     login.verifyloginpage();
-  });
+    });
 
 
   

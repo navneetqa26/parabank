@@ -29,7 +29,7 @@ jobs:
         with:
           browser: ${{ matrix.browser }}
           command: npx cypress run --browser ${{ matrix.browser }} --reporter-options reportDir=cypress/reports/${{ matrix.browser }}
-        continue-on-error: true
+        continue-on-error: true   # ✅ don't fail CI if Cypress tests fail
 
       - name: List report files
         run: ls -R cypress/reports || true
@@ -40,7 +40,7 @@ jobs:
           if ls cypress/reports/${{ matrix.browser }}/*.json 1> /dev/null 2>&1; then
             npx mochawesome-merge cypress/reports/${{ matrix.browser }}/*.json > cypress/reports/${{ matrix.browser }}/merged-reports.json
           else
-            echo '{"stats":{},"results":[]}' > cypress/reports/${{ matrix.browser }}/merged-reports.json
+            echo '{"stats":{"suites":0,"tests":0,"passes":0,"pending":0,"failures":0,"start":"","end":"","testsRegistered":0,"passPercent":0,"pendingPercent":0,"other":0,"hasOther":false,"skipped":0,"hasSkipped":false},"results":[]}' > cypress/reports/${{ matrix.browser }}/merged-reports.json
           fi
 
       - name: Generate HTML Reports (per browser)
@@ -81,7 +81,7 @@ jobs:
           if ls cypress/reports/**/merged-reports.json 1> /dev/null 2>&1; then
             npx mochawesome-merge "cypress/reports/**/merged-reports.json" > cypress/reports/final/final-merged.json
           else
-            echo '{"stats":{},"results":[]}' > cypress/reports/final/final-merged.json
+            echo '{"stats":{"suites":0,"tests":0,"passes":0,"pending":0,"failures":0,"start":"","end":"","testsRegistered":0,"passPercent":0,"pendingPercent":0,"other":0,"hasOther":false,"skipped":0,"hasSkipped":false},"results":[]}' > cypress/reports/final/final-merged.json
           fi
 
       - name: Generate Final Combined HTML Report

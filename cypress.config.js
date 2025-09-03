@@ -4,19 +4,15 @@ module.exports = defineConfig({
   e2e: {
     baseUrl: "https://parabank.parasoft.com/parabank",
     setupNodeEvents(on, config) {
-      // register plugin correctly
       require("cypress-mochawesome-reporter/plugin")(on);
       return config;
     },
-    reporter: "cypress-mochawesome-reporter",
+    reporter: "cypress-mochawesome-reporter",   // ✅ must use this, not plain mochawesome
     reporterOptions: {
-      reportDir: "cypress/reports/html",   // 👈 important for JSON + HTML
-      overwrite: false,                    // keep all attempts
-      html: true,
+      reportDir: "cypress/reports/json",
+      overwrite: false,
+      html: false,
       json: true,
-      charts: true,
-      embeddedScreenshots: true,
-      inlineAssets: true,
       saveAllAttempts: false,
     },
     video: true,
