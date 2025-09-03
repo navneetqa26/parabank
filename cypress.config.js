@@ -8,9 +8,8 @@ module.exports = defineConfig({
       return config;
     },
   },
-  reporter: "cypress-mochawesome-reporter",
+  reporter: "mochawesome",
   reporterOptions: {
-    reportDir: "cypress/reports/mochawesome",
     overwrite: true,
     html: true,
     json: true,
