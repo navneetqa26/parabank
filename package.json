@@ -9,13 +9,12 @@
   "dependencies": {
     "cypress": "^15.0.0"
   },
-  "devDependencies": {
-    "cypress-mochawesome-reporter": "^3.8.4",
-    "dotenv": "^17.2.1",
-    "mochawesome": "^7.1.3",
-    "mochawesome-merge": "^4.4.1",
-    "mochawesome-report-generator": "^6.2.0",
-    "node-polyfill-webpack-plugin": "^4.1.0",
-    "webpack": "^5.101.0"
-  }
+"devDependencies": {
+  "cypress": "^13.0.0",
+  "cypress-mochawesome-reporter": "^3.8.2",
+  "mochawesome": "^7.1.3",
+  "mochawesome-merge": "^4.3.0",
+  "marge": "^6.2.0"
+}
+
 }

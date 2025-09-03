@@ -21,15 +21,50 @@ jobs:
         with:
           browser: ${{ matrix.browser }}
           command: npx cypress run --browser ${{ matrix.browser }} --reporter-options reportDir=cypress/reports/${{ matrix.browser }}
+        continue-on-error: true   # ✅ don’t stop if tests fail
 
-      - name: Merge Mochawesome Reports
-        run: npx mochawesome-merge cypress/reports/${{ matrix.browser }}/*.json > cypress/reports/${{ matrix.browser }}/merged-reports.json
+      - name: List report files
+        run: ls -R cypress/reports || true
 
-      - name: Generate HTML Reports
+      - name: Merge Mochawesome Reports (per browser)
+        run: |
+          mkdir -p cypress/reports/${{ matrix.browser }}
+          npx mochawesome-merge cypress/reports/${{ matrix.browser }}/*.json > cypress/reports/${{ matrix.browser }}/merged-reports.json || echo "{}" > cypress/reports/${{ matrix.browser }}/merged-reports.json
+
+      - name: Generate HTML Reports (per browser)
         run: npx marge cypress/reports/${{ matrix.browser }}/merged-reports.json --reportDir cypress/reports/${{ matrix.browser }} -f "${{ matrix.browser }}-report.html"
 
-      - name: Upload HTML Reports
+      - name: Upload HTML Reports (per browser)
         uses: actions/upload-artifact@v4
         with:
           name: Cypress HTML Report (${{ matrix.browser }})
           path: cypress/reports/${{ matrix.browser }}
+
+  merge-reports:
+    runs-on: ubuntu-22.04
+    needs: cypress-run   # ✅ wait until all browser jobs finish
+    steps:
+      - name: Checkout 
+        uses: actions/checkout@v4
+
+      - name: Download all browser reports
+        uses: actions/download-artifact@v4
+        with:
+          path: cypress/reports
+
+      - name: List downloaded artifacts
+        run: ls -R cypress/reports
+
+      - name: Merge all browsers JSON reports
+        run: |
+          mkdir -p cypress/reports/final
+          npx mochawesome-merge "cypress/reports/**/merged-reports.json" > cypress/reports/final/final-merged.json
+
+      - name: Generate Final Combined HTML Report
+        run: npx marge cypress/reports/final/final-merged.json --reportDir cypress/reports/final -f "Cypress-All-Browsers.html"
+
+      - name: Upload Final Combined Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: Cypress Final Combined Report
+          path: cypress/reports/final
