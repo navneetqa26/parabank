@@ -7,7 +7,7 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "cypress": "^13.14.2",                               
+    "cypress": "^13.14.2",
     "cypress-mochawesome-reporter": "^3.8.2",
     "mochawesome": "^7.1.3",
     "mochawesome-merge": "^4.3.0",
@@ -15,7 +15,7 @@
   },
   "scripts": {
     "test": "cypress run",
-    "merge:reports": "mochawesome-merge cypress/reports/*.json > cypress/reports/merged.json",
+    "merge:reports": "if ls cypress/reports/*.json 1> /dev/null 2>&1; then mochawesome-merge cypress/reports/*.json > cypress/reports/merged.json; else echo '{\"stats\":{},\"results\":[]}' > cypress/reports/merged.json; fi",
     "generate:report": "mochawesome-report-generator cypress/reports/merged.json --reportDir cypress/reports"
   }
 }
