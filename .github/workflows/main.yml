@@ -21,6 +21,8 @@ jobs:
         with:
           browser: ${{ matrix.browser }}
           command: npx cypress run --browser ${{ matrix.browser }} --reporter mochawesome --reporter-options reportDir=cypress/reports/${{ matrix.browser }}
+      - name: List report files
+        run: ls -R cypress/reports/
       - name: Merge Mochawesome Reports
         run: npx mochawesome-merge cypress/reports/${{ matrix.browser }}/*.json > cypress/reports/${{ matrix.browser }}/merged-reports.json
       - name: Generate HTML Reports
