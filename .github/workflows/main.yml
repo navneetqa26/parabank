@@ -18,7 +18,4 @@ jobs:
 
       - name: Cypress Run in ${{ matrix.browser }}
         uses: cypress-io/github-action@v5
-        with:
-          browser: ${{ matrix.browser }}
-          command: npx cypress run --browser ${{ matrix.browser }} --reporter mochawesome --reporter-options reportDir=cypress/reports/${{ matrix.browser }}
-      
+          
