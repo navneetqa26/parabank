@@ -10,13 +10,13 @@ module.exports = defineConfig({
   },
   reporter: "mochawesome",
   reporterOptions: {
-    overwrite: true,
-    html: true,
-    json: true,
-    embeddedScreenshots: true,
-    inlineAssets: true,  // required for embedding
-    saveJson: true,
-    videoOnFailOnly: false, // include passed & failed test videos
-  },
+  overwrite: true,
+  html: true,
+  json: true,
+  embeddedScreenshots: true,
+  inlineAssets: true,
+  saveJson: true,
+  videoOnFailOnly: false,
+},
   video: true,
 });
