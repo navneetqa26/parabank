@@ -14,7 +14,21 @@ class SignupPage {
     confirmPasswordInput: () => cy.get("input[name='repeatedPassword']"),
     submitBtn: () => cy.get("input[value='Register']"),
     verifyRegistration: () => cy.get("div[id='rightPanel'] p"),
-    verifyErrorMessage: () => cy.contains('This username already exists.').should('be.visible')
+    verifyErrorMessage: () => cy.contains('This username already exists.').should('be.visible'),
+   registerLinkclick: () => cy.get("a[href*='register.htm']"),
+   submitBtnclick: () => cy.get("input[value='Register']"),
+    firstnamerequired:()=> cy.contains('First name is required.').should('be.visible'),
+    lastnamerequired:()=> cy.contains('Last name is required.').should('be.visible'),
+    addressrequired:()=> cy.contains('Address is required.').should('be.visible'),
+    cityrequired:()=> cy.contains('City is required.').should('be.visible'),  
+    staterequired:()=> cy.contains('State is required.').should('be.visible'),
+    zipcoderequired:()=> cy.contains('Zip Code is required.').should('be.visible'),
+    ssnrequired:()=> cy.contains('Social Security Number is required.').should('be.visible'),
+    usernamerequired:()=> cy.contains('Username is required.').should('be.visible'),
+    passwordrequired:()=> cy.contains('Password is required.').should('be.visible'),
+    confirmpasswordrequired:()=> cy.contains('Password confirmation is required.').should('be.visible'),
+
+
   };
 
   registerclick() {
@@ -69,7 +83,20 @@ class SignupPage {
     this.elements.verifyErrorMessage().should('be.visible');
 }
 
+reigterrequiredfield() {
+    this.elements.registerLinkclick().click();
+    this.elements.submitBtnclick().click();
+    this.elements.firstnamerequired();
+    this.elements.lastnamerequired();
+    this.elements.addressrequired();
+    this.elements.cityrequired();
+    this.elements.staterequired();
+    this.elements.zipcoderequired();
+    this.elements.ssnrequired();
+    this.elements.usernamerequired();
+    this.elements.passwordrequired();
+    this.elements.confirmpasswordrequired();
     
-}
+}}
 
 export default SignupPage;

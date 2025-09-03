@@ -47,4 +47,9 @@ describe('Signup Test Suite', () => {
     signup.submitForm();
     signup.verifyRegistrationErrormessage();
   });
+
+  it.only('Required field validation', () => {
+    //Required field
+    signup.reigterrequiredfield();
+  });
 });
