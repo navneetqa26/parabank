@@ -20,11 +20,10 @@ jobs:
         uses: cypress-io/github-action@v5
         with:
           browser: ${{ matrix.browser }}
-          command: npx cypress run --browser ${{ matrix.browser }} --reporter mochawesome --reporter-options reportDir=cypress/reports/${{ matrix.browser }}
+          command: npx cypress run --browser ${{ matrix.browser }} --reporter mochawesome --reporter-options reportDir=cypress/reports/${{ matrix.browser }}/.jsons
 
       - name: Merge Mochawesome Reports
-        run: npx mochawesome-merge cypress/reports/${{ matrix.browser }}/*.json > cypress/reports/${{ matrix.browser }}/merged-reports.json
-
+        run: npx mochawesome-merge cypress/reports/${{ matrix.browser }}/.jsons/*.json > cypress/reports/${{ matrix.browser }}/merged-reports.json
       - name: Generate HTML Reports
         run: npx marge cypress/reports/${{ matrix.browser }}/merged-reports.json --reportDir cypress/reports/${{ matrix.browser }} -f "${{ matrix.browser }}-report.html"
 
