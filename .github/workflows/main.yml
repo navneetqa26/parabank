@@ -16,12 +16,20 @@ jobs:
       - name: Checkout 
         uses: actions/checkout@v4
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
       - name: Cypress Run in ${{ matrix.browser }}
         uses: cypress-io/github-action@v6
         with:
           browser: ${{ matrix.browser }}
           command: npx cypress run --browser ${{ matrix.browser }} --reporter-options reportDir=cypress/reports/${{ matrix.browser }}
-        continue-on-error: true   # ✅ don’t stop if tests fail
+        continue-on-error: true
 
       - name: List report files
         run: ls -R cypress/reports || true
@@ -42,10 +50,18 @@ jobs:
 
   merge-reports:
     runs-on: ubuntu-22.04
-    needs: cypress-run   # ✅ wait until all browser jobs finish
+    needs: cypress-run
     steps:
       - name: Checkout 
         uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
 
       - name: Download all browser reports
         uses: actions/download-artifact@v4

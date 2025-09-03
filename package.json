@@ -16,6 +16,6 @@
   "scripts": {
     "test": "cypress run",
     "merge:reports": "mochawesome-merge cypress/reports/*.json > cypress/reports/merged.json",
-    "generate:report": "marge cypress/reports/merged.json --reportDir cypress/reports"
+    "generate:report": "mochawesome-report-generator cypress/reports/merged.json --reportDir cypress/reports"
   }
 }
