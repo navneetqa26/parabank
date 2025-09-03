@@ -32,7 +32,7 @@ jobs:
           npx mochawesome-merge cypress/reports/${{ matrix.browser }}/*.json > cypress/reports/${{ matrix.browser }}/merged-reports.json || echo "{}" > cypress/reports/${{ matrix.browser }}/merged-reports.json
 
       - name: Generate HTML Reports (per browser)
-        run: npx marge cypress/reports/${{ matrix.browser }}/merged-reports.json --reportDir cypress/reports/${{ matrix.browser }} -f "${{ matrix.browser }}-report.html"
+        run: npx mochawesome-report-generator cypress/reports/${{ matrix.browser }}/merged-reports.json --reportDir cypress/reports/${{ matrix.browser }} -f "${{ matrix.browser }}-report.html"
 
       - name: Upload HTML Reports (per browser)
         uses: actions/upload-artifact@v4
@@ -61,7 +61,7 @@ jobs:
           npx mochawesome-merge "cypress/reports/**/merged-reports.json" > cypress/reports/final/final-merged.json
 
       - name: Generate Final Combined HTML Report
-        run: npx marge cypress/reports/final/final-merged.json --reportDir cypress/reports/final -f "Cypress-All-Browsers.html"
+        run: npx mochawesome-report-generator cypress/reports/final/final-merged.json --reportDir cypress/reports/final -f "Cypress-All-Browsers.html"
 
       - name: Upload Final Combined Report
         uses: actions/upload-artifact@v4
