@@ -7,16 +7,17 @@ module.exports = defineConfig({
       require("cypress-mochawesome-reporter/plugin")(on);
       return config;
     },
-  },
-  reporter: "mochawesome",
-  reporterOptions: {
-  overwrite: true,
-  html: true,
-  json: true,
-  embeddedScreenshots: true,
-  inlineAssets: true,
-  saveJson: true,
-  videoOnFailOnly: false,
-},
-  video: true,
+    reporter: "mochawesome",
+    reporterOptions: {
+      overwrite: true,
+      html: true,
+      json: true,
+      embeddedScreenshots: true,
+      inlineAssets: true,
+      saveJson: true,
+      videoOnFailOnly: false,
+      // Do NOT set reportDir here; set it via CLI in your workflow
+    },
+    video: true,
+  }
 });
