@@ -1,6 +1,6 @@
-name: Run Cypress Test And Display Report - v3
+name: Run Cypress Tests - Multi Browser
 
-on: 
+on:
   push:
   workflow_dispatch:
 
@@ -13,7 +13,7 @@ jobs:
         browser: [chrome, firefox, edge]
 
     steps:
-      - name: Checkout 
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Setup Node.js
@@ -28,7 +28,4 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           browser: ${{ matrix.browser }}
-          command: npx cypress run --browser ${{ matrix.browser }} --reporter-options reportDir=cypress/reports/${{ matrix.browser }}
-        continue-on-error: true   # ✅ don't fail CI if Cypress tests fail
-
-     
+          command: npx cypress run --browser ${{ matrix.browser }}
