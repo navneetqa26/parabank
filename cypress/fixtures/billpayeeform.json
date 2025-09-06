@@ -1,0 +1,30 @@
+{
+    "validUser": {
+        "username": "test",
+        "password": "root"
+    },
+
+    "billpay": {
+        "payeename": "test",
+        "addressname": "123, Local Street",
+        "cityname": "London",
+        "statename": "Goa",
+        "zipcodes": "12345",
+        "numbers": "+91 9816841935",
+        "accountnumber": "12345",
+        "confirmaccountnumber": "12345",
+        "amountvalue": "50"
+    },
+
+    "invalidbillpay":{
+        "incorrectaccountnumber": "qwerty",
+        "incorrectverifyaccountnumber": "qwerty",
+        "incorrectamountvalue": "qwerty"
+
+
+    },
+    "invalidUser": {
+        "username": "invaliduser",
+        "password": "wrongpassword"
+    }
+}
