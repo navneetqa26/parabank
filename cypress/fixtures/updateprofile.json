@@ -1,0 +1,15 @@
+{
+    "validUser": {
+        "username": "test",
+        "password": "root"
+    },
+    "formdetails": {
+        "name": "Navneet",
+        "last": "Singh",
+        "address": "123, local street",
+        "cityname": "Mohali",
+        "streetname": "Local",
+        "zipcodenumber": "12345",
+        "phonenumber": "+91 98524855"
+    }
+}
